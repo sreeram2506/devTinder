@@ -11,3 +11,14 @@
 - Difference between caret and tilde (^ and ~)
 
 
+- intialize git 
+-  add node_modules to gitignore
+- Create a remote repo on github 
+- Push all code to remote origin
+- Play with routes and route extensions ex. /hello , / , hello/2, /xyz
+- Order of the routes matter a lot.
+- Install Postman app and make a workspace/collection  -> test api call
+- Write logic to handle GET, POST, PATCH, DELETE API Calls and test them on postman
+
+
+
