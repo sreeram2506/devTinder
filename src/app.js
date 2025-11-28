@@ -2,38 +2,24 @@ const express = require('express');
 
 const app = express();
 
-app.use("/test", (req, res) => {
-    res.send('This is a test route');
-});
-
-app.use("/users", (req, res) => {
-    res.send('This is the users route');
-});
-
-
-app.get("/users", (req, res) => {
-    res.send({
-        'firstName': 'John',
-        'lastName': 'Doe'
-    });
-});
-
-app.post("/users", (req, res) => {
-    res.send({
-        'status': 'User created successfully'
-    });
-});
-
-app.delete("/users", (req, res) => {
-    res.send({
-        'status': 'User deleted successfully'
-    });
-});
-
-app.patch("/users", (req, res) => {
-    res.send({
-        'status': 'User updated successfully'
-    });
+app.use("/user", (req, res, next)=> {
+    //Route Handler
+    next();
+    // res.send("Route Handler 1");
+}, 
+(req, res, next) => {
+    //Route Handler 2
+    // res.send("Route Handler 2");
+    next();
+}, 
+(req, res, next) => {
+    //Route Handler 3
+    // res.send("Route Handler 3");
+    next();
+}, (req, res, next) => {
+    //Route Handler 4
+    // res.send("Route Handler 4");
+    res.send("Final Response from Route Handler 4"); 
 });
 
 app.listen(3000, function () {
