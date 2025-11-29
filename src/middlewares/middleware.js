@@ -5,4 +5,4 @@ function middleware(req, res, next) {
 }
 
 
-module.exports = { middleware, usermiddleware, authmiddleware, logmiddleware, extraMiddleware, anotherMiddleware };
+module.exports = { middleware  };
