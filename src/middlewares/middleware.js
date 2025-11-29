@@ -28,6 +28,11 @@ function anotherMiddleware(req, res, next) {
     console.log("Another Middleware executed");
     next();
 
-    
+
 }
-module.exports = { middleware, usermiddleware, authmiddleware, logmiddleware };
+
+function finalMiddleware(req, res, next) {   
+    console.log("Final Middleware executed");
+    next();
+}
+module.exports = { middleware, usermiddleware, authmiddleware, logmiddleware, extraMiddleware, anotherMiddleware, finalMiddleware };
