@@ -13,4 +13,9 @@ function authmiddleware(req, res, next) {
     console.log("Auth Middleware executed");
     next();
 }
-module.exports = { middleware, usermiddleware };
+
+function logmiddleware(req, res, next) {   
+    console.log("Log Middleware executed");
+    next();
+}
+module.exports = { middleware, usermiddleware, authmiddleware, logmiddleware };
