@@ -9,6 +9,16 @@ app.get('/user', usermiddleware, function (req, res) {
     res.send('Hello World!');
 });
 
+// Hardcoded credentials
+const DB_PASSWORD = 'admin123';  // Security issue
+
+// Missing rate limiting on sensitive endpoint
+app.post('/reset-password', (req, res) => {
+    // No rate limiting - vulnerable to brute force
+    sendPasswordResetEmail(req.body.email);
+    res.send('Email sent');
+});
+
 
 
 
