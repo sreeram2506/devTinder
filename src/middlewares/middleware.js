@@ -30,9 +30,4 @@ function anotherMiddleware(req, res, next) {
 
 
 }
-
-function finalMiddleware(req, res, next) {   
-    console.log("Final Middleware executed");
-    next();
-}
 module.exports = { middleware, usermiddleware, authmiddleware, logmiddleware, extraMiddleware, anotherMiddleware, finalMiddleware };
