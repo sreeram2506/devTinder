@@ -4,10 +4,6 @@ function middleware(req, res, next) {
     next();
 }
 
-function usermiddleware(req, res, next) {   
-    console.log("User Middleware executed");
-    next();
-}
 
 
 
