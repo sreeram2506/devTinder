@@ -46,4 +46,18 @@
 - Error Handling while doing some db operations
 
 - Difference between JSON and Is Object
+- Add the express json middleware to your app
+- Make your singup API dyncamic to reieve data from the end user
+- User.findOne with duplicate email ids, which object returned
+- API-Get user by emaiId
+- API - Feed API - GET /feed - get all the users from the database
+- API - Get user by ID
+- Create a delete user API
+- Difference between PATCH and PUT
+- API - Update a user
+- Explore the Mongoose Document for Model methods
+- What are options in a Mode.findOneandUpdate methos, explore more about it.
+- API - Update the user with emain ID
+
+
 
