@@ -1,7 +1,7 @@
 const db = require('mongoose');
-
+require('dotenv').config();
 async function connectDatabase() {
-    const DB_URI = 'mongodb+srv://sreeramchenchukumar_db_user:passworddevTinder@namastenode.hlxnlyt.mongodb.net/devtinder';
+    const DB_URI = process.env.DB_URI;
     console.log("Connecting to database at", DB_URI);
     try {
         const a = await db.connect(DB_URI)

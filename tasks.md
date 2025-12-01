@@ -44,3 +44,6 @@
 - Create POST /singup API to add data to database.
 - Push some documents using API calls from postman
 - Error Handling while doing some db operations
+
+- Difference between JSON and Is Object
+
