@@ -24,7 +24,7 @@ app.post('/signup', async (req, res)=> {
         res.send("User signed up successfully");
     } catch (err){
         console.log(err)
-        res.status(400).send("unable to save user");
+        res.status(400).send("unable to save user" + err.message);
     }
 })
 
@@ -71,6 +71,9 @@ app.delete('/user', async (req, res)=> {
 
 app.patch('/user', async (req, res)=> {
     try { 
+        if (!Object.keys(req?.body).includes('email') || Object.keys(req.body).length === 0) {
+            throw new Error("No emailID provided for update");
+        }
         const users = await User.find({})
         const id = users.find((user)=> {
             if (user.email === req.body.email) {
@@ -83,6 +86,6 @@ app.patch('/user', async (req, res)=> {
         
     } catch(err){
         console.log(err)
-        res.status(400).send("unable to update user");
+        res.status(400).send("unable to update user: " + err.message);
     }
 });

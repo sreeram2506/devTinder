@@ -59,5 +59,18 @@
 - What are options in a Mode.findOneandUpdate methos, explore more about it.
 - API - Update the user with emain ID
 
+- Explore schematype options from the document
+- add required , unique, lowecase, min, max, trim
+- Add default
+- Create a custom validator function for gender
+- Improve the DB schema PUt all appropriate validations on each field in schema
+- Add timestamps for the user schema
+- Add API Level validation on patch request & Signup post api
+- DATA Sanitization - Add API validation for each field 
+- Install validator
+- Explore validator library functions and use validator function passwrod, emia, photurl
+- Never trust req.body
+
+
 
 
