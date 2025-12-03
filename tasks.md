@@ -71,6 +71,12 @@
 - Explore validator library functions and use validator function passwrod, emia, photurl
 - Never trust req.body
 
+- Validate data in sinup API
+- Install bcrypt package
+- encrypt the pssword using bcrypt.hash & save the user with encryoted passsword
+- Create login API 
+- Compare passowrd and throws errors if email or passwords invalid
+
 
 
 

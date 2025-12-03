@@ -5,7 +5,8 @@ const { middleware } = require('./middlewares/middleware');
 const { connectDatabase } = require('./config/database');
 const successfulldbconnect = connectDatabase();
 const User = require('./models/user');
-
+const { validateSignupData, hashPassword } = require('./utils/validator');
+const bcrypt = require('bcrypt');
 successfulldbconnect.then(() => {
     console.log("Ready to accept requests after successful DB connection.");
     app.listen(3000, function () {
@@ -17,8 +18,16 @@ successfulldbconnect.then(() => {
 app.use(express.json());
 app.use(middleware);
 app.post('/signup', async (req, res)=> {
+
     const newUser = new User(req.body)
     try{
+        const { isValid, errors } = validateSignupData(req.body);
+        if (!isValid) {
+            throw new Error("Invalid signup data: " + JSON.stringify(errors));
+        }
+        const { password } = req.body;
+        const hashpassword = await hashPassword(password);
+        newUser.password = hashpassword;
         await newUser.save()
         console.log("User saved successfully");
         res.send("User signed up successfully");
@@ -27,6 +36,27 @@ app.post('/signup', async (req, res)=> {
         res.status(400).send("unable to save user" + err.message);
     }
 })
+
+app.post('/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        if (!email || !password) {
+            throw new Error("Email and password are required for login");
+        }
+        const user = await User.findOne({ email: email });
+        if (!user) {
+            return res.status(404).send("Invalid credentials");
+        }
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(404).send("Invalid  credsentials");
+        }
+        res.send("Login successful");
+    } catch (err) {
+        console.log(err);
+        res.status(400).send("Unable to login: " + err.message);
+    }
+});
 
 app.get('/feed', async (req, res)=> {
     try{ 
