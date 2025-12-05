@@ -7,6 +7,9 @@ const successfulldbconnect = connectDatabase();
 const User = require('./models/user');
 const { validateSignupData, hashPassword } = require('./utils/validator');
 const bcrypt = require('bcrypt');
+const cookieParser = require('cookie-parser')
+const jwt = require('jsonwebtoken');
+const user = require('./models/user');
 successfulldbconnect.then(() => {
     console.log("Ready to accept requests after successful DB connection.");
     app.listen(3000, function () {
@@ -16,6 +19,7 @@ successfulldbconnect.then(() => {
     console.error("Error during DB connection:", err);
 });
 app.use(express.json());
+app.use(cookieParser())
 app.use(middleware);
 app.post('/signup', async (req, res)=> {
 
@@ -51,7 +55,9 @@ app.post('/login', async (req, res) => {
         if (!isMatch) {
             return res.status(404).send("Invalid  credsentials");
         }
-        res.send("Login successful");
+        const token = jwt.sign({ _id: user._id }, 'DEVTinder@124');
+        res.cookie("token", token);
+        res.send("Login successful", );
     } catch (err) {
         console.log(err);
         res.status(400).send("Unable to login: " + err.message);
@@ -119,3 +125,18 @@ app.patch('/user', async (req, res)=> {
         res.status(400).send("unable to update user: " + err.message);
     }
 });
+
+app.post("/profile", async (req, res) => {
+
+    try {
+        const { token } = await req.cookies
+        console.log()
+        const decodedJWT = jwt.verify(token, 'DEVTinder@124');  
+        const { _id } = decodedJWT
+        const userdetails = await user.findById(_id)
+        res.send( userdetails )
+    } catch(err) {
+        res.status(500).send("Error", err.message)
+    }
+
+})
