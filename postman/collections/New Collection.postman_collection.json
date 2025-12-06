@@ -1,7 +1,7 @@
 {
   "info": {
     "_postman_id": "e494bf34-688e-4c67-9aae-360c5055430b",
-    "name": "New Collection",
+    "name": "devTinder",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -70,6 +70,23 @@
           "port": "3000",
           "path": [
             "profile"
+          ]
+        }
+      }
+    },
+    {
+      "name": "/sendConnection",
+      "id": "14aec059-9b31-4b6c-aae8-c0b0823a6dfe",
+      "request": {
+        "method": "POST",
+        "url": {
+          "raw": "localhost:3000/sendConnection",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "sendConnection"
           ]
         }
       }

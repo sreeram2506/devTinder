@@ -83,5 +83,8 @@
 - install jsowebtoekn
 - IN login API, after email and password validation, create a JWT token and send it back to user
 - read the cookie inside your profile API and find the loggedIn user
+- userAuth middleware
+- Add the userauth middle ware in profile API and new swend connection request
+- sethe expiry of jwt token and and cookies to 7 days after
 
 

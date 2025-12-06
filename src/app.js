@@ -10,6 +10,7 @@ const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser')
 const jwt = require('jsonwebtoken');
 const user = require('./models/user');
+const { userAuth } = require('./middlewares/middleware');
 successfulldbconnect.then(() => {
     console.log("Ready to accept requests after successful DB connection.");
     app.listen(3000, function () {
@@ -20,7 +21,6 @@ successfulldbconnect.then(() => {
 });
 app.use(express.json());
 app.use(cookieParser())
-app.use(middleware);
 app.post('/signup', async (req, res)=> {
 
     const newUser = new User(req.body)
@@ -51,7 +51,7 @@ app.post('/login', async (req, res) => {
         if (!user) {
             return res.status(404).send("Invalid credentials");
         }
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(password, user.password, { expiresIn: '1d' });
         if (!isMatch) {
             return res.status(404).send("Invalid  credsentials");
         }
@@ -126,17 +126,20 @@ app.patch('/user', async (req, res)=> {
     }
 });
 
-app.post("/profile", async (req, res) => {
-
+app.post("/profile", userAuth, async (req, res) => {
     try {
-        const { token } = await req.cookies
-        console.log()
-        const decodedJWT = jwt.verify(token, 'DEVTinder@124');  
-        const { _id } = decodedJWT
-        const userdetails = await user.findById(_id)
+        const userdetails = req.user;
         res.send( userdetails )
     } catch(err) {
         res.status(500).send("Error", err.message)
     }
-
 })
+
+app.post( "/sendConnection", userAuth, async (req, res) => {
+    try {
+        const user = req.user;
+        res.send(user.firstName + " Connection request sent successfully");
+    } catch(err) {
+        res.status(500).send("Error: " + err.message)
+    }
+});
