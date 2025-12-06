@@ -89,3 +89,11 @@
 - create Userschema method to get jwt 
 - create Userschema method to compare passwords
 - Please use the repective variables for better readability
+
+- Explore tinder APIs
+- Create a list all API you can think of in Dev tinder
+- Group multiple routes under respective route
+- Read documentation of express.ROuter
+- Create routes folder for managing auth,profile request routers
+- Create authRouter, profileRouter, requestRouter
+- Import these routers in app.js
