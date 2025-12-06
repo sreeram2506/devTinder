@@ -5,7 +5,7 @@ const { middleware } = require('./middlewares/middleware');
 const { connectDatabase } = require('./config/database');
 const successfulldbconnect = connectDatabase();
 const User = require('./models/user');
-const { validateSignupData, hashPassword } = require('./utils/validator');
+const { validateSignupData } = require('./utils/validator');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser')
 const jwt = require('jsonwebtoken');
@@ -30,7 +30,7 @@ app.post('/signup', async (req, res)=> {
             throw new Error("Invalid signup data: " + JSON.stringify(errors));
         }
         const { password } = req.body;
-        const hashpassword = await hashPassword(password);
+        const hashpassword = await hashpassword(password);
         newUser.password = hashpassword;
         await newUser.save()
         console.log("User saved successfully");
@@ -43,7 +43,7 @@ app.post('/signup', async (req, res)=> {
 
 app.post('/login', async (req, res) => {
     try {
-        const { email, password } = req.body;
+    const { email, password } = req.body;
         if (!email || !password) {
             throw new Error("Email and password are required for login");
         }
@@ -51,78 +51,16 @@ app.post('/login', async (req, res) => {
         if (!user) {
             return res.status(404).send("Invalid credentials");
         }
-        const isMatch = await bcrypt.compare(password, user.password, { expiresIn: '1d' });
+        const isMatch = await user.verifyHash(password)
         if (!isMatch) {
             return res.status(404).send("Invalid  credsentials");
         }
-        const token = jwt.sign({ _id: user._id }, 'DEVTinder@124');
+        const token = await user.createJwt();
         res.cookie("token", token);
         res.send("Login successful", );
     } catch (err) {
         console.log(err);
         res.status(400).send("Unable to login: " + err.message);
-    }
-});
-
-app.get('/feed', async (req, res)=> {
-    try{ 
-        const users = await User.find({})
-        res.send(users);
-    }catch(err){
-        console.log(err)
-        res.status(400).send("unable to get users");
-    }
-})
-
-app.get('/user', async (req, res)=> {
-    try {
-        const user = await User.find({ email: req.body.email})
-        if (user.length) {
-            res.send(user);
-        } else {
-            res.status(404).send("User not found");
-        }
-    }catch(err){
-        console.log(err)
-        res.status(400).send("unable to get user");
-    }
-}); 
-
-app.delete('/user', async (req, res)=> {
-    try { 
-        const users = await User.find({})
-        const id = users.find((user)=> {
-            if (user.email === req.body.email) {
-                return user.id;
-            }
-        })
-        await User.findByIdAndDelete(id);
-        res.send("User deleted successfully");
-        
-    } catch(err){
-        console.log(err)
-        res.status(400).send("unable to delete user");
-    }
-});
-
-app.patch('/user', async (req, res)=> {
-    try { 
-        if (!Object.keys(req?.body).includes('email') || Object.keys(req.body).length === 0) {
-            throw new Error("No emailID provided for update");
-        }
-        const users = await User.find({})
-        const id = users.find((user)=> {
-            if (user.email === req.body.email) {
-                return user.id;
-            }
-        })
-        console.log("Updating user with id:", id);
-        await User.findByIdAndUpdate(id, req.body);
-        res.send("User updated successfully");
-        
-    } catch(err){
-        console.log(err)
-        res.status(400).send("unable to update user: " + err.message);
     }
 });
 

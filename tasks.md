@@ -86,5 +86,6 @@
 - userAuth middleware
 - Add the userauth middle ware in profile API and new swend connection request
 - sethe expiry of jwt token and and cookies to 7 days after
-
-
+- create Userschema method to get jwt 
+- create Userschema method to compare passwords
+- Please use the repective variables for better readability
