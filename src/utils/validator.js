@@ -23,4 +23,25 @@ function hashPassword(password) {
         })
         .catch(err => { throw new Error("Error in hashing password: " + err.message); });
 }
-module.exports = { validateSignupData, hashPassword };
+
+const validateSchema = (schema) => {
+  return (req, res, next) => {
+    const { error, value } = schema.validate(req.body, {
+      abortEarly: false,
+      stripUnknown: false,
+    });
+
+    if (error) {
+      return res.status(400).json({
+        message: "Validation failed",
+        errors: error.details.map(d => d.message)
+      });
+    }
+
+    req.body = value; 
+    next();
+  };
+};
+
+
+module.exports = { validateSignupData, hashPassword, validateSchema };

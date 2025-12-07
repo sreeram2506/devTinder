@@ -7,6 +7,14 @@ const cookieParser = require('cookie-parser');
 const authRouter = require('./routes/auth-routes');
 const connectionRouter = require('./routes/connection-routes');
 const profileRouter = require('./routes/profile-routes');
+
+app.use(express.json());
+app.use(cookieParser());
+
+app.use('/',authRouter);
+app.use('/', connectionRouter);
+app.use('/', profileRouter);
+
 successfulldbconnect.then(() => {
     console.log("Ready to accept requests after successful DB connection.");
     app.listen(3000, function () {
@@ -15,8 +23,3 @@ successfulldbconnect.then(() => {
 }).catch((err) => {
     console.error("Error during DB connection:", err);
 });
-app.use(express.json());
-app.use(cookieParser());
-app.use('/',authRouter);
-app.use('/', connectionRouter);
-app.use('/', profileRouter);
