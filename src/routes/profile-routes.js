@@ -48,7 +48,7 @@ profileRouter.patch(
   }
 );
 
-profileRouter.patch('/profile/update/password', userAuth, async (req, res) => {
+profileRouter.patch('/profile/update/password', userAuth, validateSchema(passwordSchema), async (req, res) => {
     try {
         const { _id: userId } = req.user;
         const { password } = req.body;

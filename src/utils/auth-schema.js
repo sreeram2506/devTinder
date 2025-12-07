@@ -8,6 +8,11 @@ profileEditSchema = Joi.object({
   age: Joi.number().integer().min(18).max(100)
 }).unknown(false);
 
+passwordSchema = Joi.object({
+  password: Joi.string().min(6).max(128).required()
+}).unknown(false);
+
 module.exports = {
-    profileEditSchema
+    profileEditSchema,
+    passwordSchema
 }
