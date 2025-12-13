@@ -13,6 +13,6 @@ passwordSchema = Joi.object({
 }).unknown(false);
 
 module.exports = {
-    profileEditSchema,
-    passwordSchema
+  profileEditSchema,
+  passwordSchema
 }
