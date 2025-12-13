@@ -101,3 +101,16 @@
 - Create PATCH /profile/edit
 - Create PATCH /profile/password API = forgot password API
 - Make sure all data in every POST, PATCH apis
+
+- Create connection request schema 
+- Send Connection Request API
+- Proper validation of data
+- Think about all corner case
+-  $or query and $query in mongoose - all $querys
+- Achem.pre("save") function
+- Read the article about compound index (mongodb article)
+- why should not we create indexes for fields.
+- Read more about indexes in mongodb
+- Why do we need index
+- What is the advantages and disadvantages for index
+
