@@ -37,7 +37,6 @@ const validateSchema = (schema) => {
         errors: error.details.map(d => d.message)
       });
     }
-
     req.body = value; 
     next();
   };
