@@ -16,12 +16,10 @@ function validateSignupData(data) {
 }
 
 function hashPassword(password) {
-    return bcrypt.hash(password, 10)
-        .then(hash => {
-            console.log(`Hash: ${hash}`);
-            return hash;
-        })
-        .catch(err => { throw new Error("Error in hashing password: " + err.message); });
+  return bcrypt.hash(password, 10).then(hash => {
+    console.log(`Hash: ${hash}`);
+    return hash;
+  }).catch(err => { throw new Error("Error in hashing password: " + err.message); });
 }
 
 const validateSchema = (schema) => {
