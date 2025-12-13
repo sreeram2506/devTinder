@@ -35,3 +35,82 @@
 - Writes a dummy auth middleware for admin
 - Write a dummy auth middleware for all user routes, excepr /user/login
 - Error handling using app.use app.use ('/', (err, req, res, next)=> {})
+
+- Crerate a free cluster mongod official website (Mongo atlas)
+- Install mongoose library
+- Connect you app to the db ("connection-url"/devTinder)
+- Call the connectDB function and connect to database before starting app on port
+- Create useschema and model
+- Create POST /singup API to add data to database.
+- Push some documents using API calls from postman
+- Error Handling while doing some db operations
+
+- Difference between JSON and Is Object
+- Add the express json middleware to your app
+- Make your singup API dyncamic to reieve data from the end user
+- User.findOne with duplicate email ids, which object returned
+- API-Get user by emaiId
+- API - Feed API - GET /feed - get all the users from the database
+- API - Get user by ID
+- Create a delete user API
+- Difference between PATCH and PUT
+- API - Update a user
+- Explore the Mongoose Document for Model methods
+- What are options in a Mode.findOneandUpdate methos, explore more about it.
+- API - Update the user with emain ID
+
+- Explore schematype options from the document
+- add required , unique, lowecase, min, max, trim
+- Add default
+- Create a custom validator function for gender
+- Improve the DB schema PUt all appropriate validations on each field in schema
+- Add timestamps for the user schema
+- Add API Level validation on patch request & Signup post api
+- DATA Sanitization - Add API validation for each field 
+- Install validator
+- Explore validator library functions and use validator function passwrod, emia, photurl
+- Never trust req.body
+
+- Validate data in sinup API
+- Install bcrypt package
+- encrypt the pssword using bcrypt.hash & save the user with encryoted passsword
+- Create login API 
+- Compare passowrd and throws errors if email or passwords invalid
+
+- install cookie-parser
+- just send a dummy cookie to user
+- create GET /profile api and check if you get the cookie back
+- install jsowebtoekn
+- IN login API, after email and password validation, create a JWT token and send it back to user
+- read the cookie inside your profile API and find the loggedIn user
+- userAuth middleware
+- Add the userauth middle ware in profile API and new swend connection request
+- sethe expiry of jwt token and and cookies to 7 days after
+- create Userschema method to get jwt 
+- create Userschema method to compare passwords
+- Please use the repective variables for better readability
+
+- Explore tinder APIs
+- Create a list all API you can think of in Dev tinder
+- Group multiple routes under respective route
+- Read documentation of express.ROuter
+- Create routes folder for managing auth,profile request routers
+- Create authRouter, profileRouter, requestRouter
+- Import these routers in app.js
+- Create POST /logout API
+- Create PATCH /profile/edit
+- Create PATCH /profile/password API = forgot password API
+- Make sure all data in every POST, PATCH apis
+
+- Create connection request schema 
+- Send Connection Request API
+- Proper validation of data
+- Think about all corner case
+-  $or query and $query in mongoose - all $querys
+- Achem.pre("save") function
+- Read the article about compound index (mongodb article)
+- why should not we create indexes for fields.
+- Read more about indexes in mongodb
+- Why do we need index
+- What is the advantages and disadvantages for index
+
